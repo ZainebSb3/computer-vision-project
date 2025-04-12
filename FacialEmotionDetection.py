@@ -121,4 +121,78 @@ from sklearn.gaussian_process.kernels import RBF
 from sklearn import metrics
 clf1 = MLPClassifier(hidden_layer_sizes=(60,), max_iter = 2000,activation = 'logistic',alpha=0.0001, solver = 'adam',shuffle=True)
 !pip install scikit-elm
+from skelm import ELMClassifier
+clf2=svm.SVC(kernel="linear", probability=True , gamma="scale", C=1)
+clf2.fit(x_for_training, y_train)
+prediction=clf2.predict(x_test_feature)
+prediction = le.inverse_transform(prediction)
+print("accuracy = ", metrics.accuracy_score(test_labels,prediction))
+clf3=KNeighborsClassifier(n_neighbors=5, weights='distance')
+clf3.fit(x_for_training, y_train)
+prediction=clf3.predict(x_test_feature)
+prediction = le.inverse_transform(prediction)
+print("accuracy = ", metrics.accuracy_score(test_labels,prediction))
+cm = confusion_matrix(test_labels, prediction)
+cmn = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+os.chdir("/content/drive/MyDrive/images")
+CLASSES = []
+folders = os.listdir("/content/drive/MyDrive/images/Test")
+for f in folders:
+    CLASSES.append(f)
+CLASSES
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Créer la sous-trame
+fig, ax = plt.subplots()
+
+# Tracer la heatmap avec seaborn
+sns.heatmap(cm, annot=True, cmap='Blues', linewidth=.5, fmt='g', ax=ax)
+
+# Ajouter un espace entre les classes
+plt.subplots_adjust(left=0.05, right=0.95, top=1, bottom=0.00)
+
+# Ajouter un titre et des étiquettes
+ax.set_title('Confusion Matrix')
+ax.set_xlabel('Predicted labels')
+ax.set_ylabel('True labels')
+
+# Définir les étiquettes des axes
+ax.xaxis.set_ticklabels(CLASSES)
+ax.yaxis.set_ticklabels(CLASSES)
+
+# Afficher la heatmap
+plt.show()
+target_names=['Angry','Disgust','Fear', 'Happy','Neutral','Sad']
+print(classification_report(test_labels,prediction,target_names=target_names))
+import os
+import cv2
+from tensorflow.keras.preprocessing.image import load_img
+from PIL import Image
+
+import numpy as np
+import matplotlib.pyplot as plt
+img_t=[]
+img=load_img('/content/drive/MyDrive/images/Train/Happy/KA.HA2.30.tiff', target_size = (224, 224) )
+plt.imshow(img)
+img_t.append(img)
+img_t=np.array(img_t)
+img_t=img_t/255.0
+x_test_feature_img=model.predict(img_t)
+x_test_feature_img=x_test_feature_img.reshape(x_test_feature_img.shape[0],-1)
+prediction=clf3.predict(x_test_feature_img)
+#predicted_class=np.argmax(prediction)
+if prediction==0 :
+  print('R1')
+elif prediction==1 :
+  print('R2')
+elif prediction==2 :
+  print('R3')
+elif prediction==3 :
+  print('R4')
+else :
+  print('R5')
+
+
+
 
