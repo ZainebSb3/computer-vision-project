@@ -162,7 +162,7 @@ ax.yaxis.set_ticklabels(CLASSES)
 
 # Afficher la heatmap
 plt.show()
-target_names=['Angry','Disgust','Fear', 'Happy','Neutral','Sad']
+target_names=['Angry','Disgust','Fear', 'Happy','Neutral','Sad','Surprised']
 print(classification_report(test_labels,prediction,target_names=target_names))
 import os
 import cv2
@@ -182,15 +182,19 @@ x_test_feature_img=x_test_feature_img.reshape(x_test_feature_img.shape[0],-1)
 prediction=clf3.predict(x_test_feature_img)
 #predicted_class=np.argmax(prediction)
 if prediction==0 :
-  print('R1')
+  print('Angry')
 elif prediction==1 :
-  print('R2')
+  print('Disgust')
 elif prediction==2 :
-  print('R3')
+  print('Fear')
 elif prediction==3 :
-  print('R4')
+  print('Happy')
+elif prediction==4 :
+  print('Neutral')
+elif prediction==5 :
+  print('Sad')
 else :
-  print('R5')
+  print('Surprised')
 
 
 
