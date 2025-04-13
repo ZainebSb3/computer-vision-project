@@ -121,7 +121,6 @@ from sklearn.gaussian_process.kernels import RBF
 from sklearn import metrics
 clf1 = MLPClassifier(hidden_layer_sizes=(60,), max_iter = 2000,activation = 'logistic',alpha=0.0001, solver = 'adam',shuffle=True)
 !pip install scikit-elm
-from skelm import ELMClassifier
 clf2=svm.SVC(kernel="linear", probability=True , gamma="scale", C=1)
 clf2.fit(x_for_training, y_train)
 prediction=clf2.predict(x_test_feature)
